@@ -1,6 +1,7 @@
-
 import 'package:flutter/material.dart';
 import 'package:restaurant/data/model/models.dart';
+
+import 'restaurant_list_item.dart';
 
 class RestaurantList extends StatelessWidget {
   const RestaurantList({
@@ -12,10 +13,14 @@ class RestaurantList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.separated(
+    return ListView.builder(
+      padding: const EdgeInsets.symmetric(vertical: 14),
+      shrinkWrap: true,
+      physics: NeverScrollableScrollPhysics(),
       itemCount: restaurants.length,
-      separatorBuilder: (_, __) => SizedBox(height: 14),
-      itemBuilder: (_, index) => Text(restaurants[index].name ?? '-'),
+      itemBuilder: (_, index) => RestaurantListItem(
+        restaurant: restaurants[index],
+      ),
     );
   }
 }

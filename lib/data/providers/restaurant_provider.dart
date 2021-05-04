@@ -26,3 +26,23 @@ final restaurantProvider =
     return RestaurantNotifier(ref.read);
   },
 );
+
+final filteredRestaurantProvider = Provider<List<Restaurant>>((ref) {
+  final restaurantRef = ref.watch(restaurantProvider);
+  final query = ref.watch(restaurantSearchProvider).state;
+
+  return restaurantRef.maybeWhen(
+    data: (restaurants) => query == null || query == ''
+        ? restaurants
+        : restaurants
+            .where((restaurant) =>
+                restaurant.name!.toLowerCase().contains(query) ||
+                restaurant.description!.toLowerCase().contains(query) ||
+                restaurant.city!.toLowerCase().contains(query))
+            .toList(),
+    orElse: () => [],
+  );
+});
+
+final restaurantSearchProvider = StateProvider<String?>((_) => null);
+final selectedRestaurantProvider = StateProvider<Restaurant?>((_) => null);

@@ -11,6 +11,8 @@ class RestaurantRepository {
       final data =
           await rootBundle.loadString('assets/json/local_restaurant.json');
 
+      await Future.delayed(Duration(seconds: 3));
+
       if (data == '') return [];
 
       final List json = jsonDecode(data)["restaurants"];

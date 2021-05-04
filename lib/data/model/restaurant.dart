@@ -1,4 +1,3 @@
-
 import 'package:json_annotation/json_annotation.dart';
 
 import 'menu.dart';
@@ -16,16 +15,18 @@ class Restaurant {
   @JsonKey(name: 'menus')
   Menu? menu;
 
-  Restaurant(
-      {this.id,
-      this.name,
-      this.description,
-      this.pictureId,
-      this.city,
-      this.rating,
-      this.menu,});
+  Restaurant({
+    this.id,
+    this.name,
+    this.description,
+    this.pictureId,
+    this.city,
+    this.rating,
+    this.menu,
+  });
 
-  factory Restaurant.fromJson(Map<String, dynamic> data) => _$RestaurantFromJson(data);
+  factory Restaurant.fromJson(Map<String, dynamic> data) =>
+      _$RestaurantFromJson(data);
 
   Map<String, dynamic> toJson() => _$RestaurantToJson(this);
 }
