@@ -1,3 +1,4 @@
+import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:restaurant/data/providers/providers.dart';
@@ -110,7 +111,13 @@ class CustomSliverAppBarDelegate extends SliverPersistentHeaderDelegate {
               ),
             ),
             onChanged: (value) {
-              context.read(restaurantSearchProvider).state = value;
+              EasyDebounce.debounce(
+                'search-debounce',
+                Duration(milliseconds: 500),
+                () => context
+                    .read(restaurantProvider.notifier)
+                    .searchRestaurants(value),
+              );
             },
           ),
         ),

@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:restaurant/data/model/review.dart';
 
 import 'menu.dart';
 
@@ -14,6 +15,7 @@ class Restaurant {
   double? rating;
   @JsonKey(name: 'menus')
   Menu? menu;
+  List<Review>? customerReviews;
 
   Restaurant({
     this.id,
@@ -23,6 +25,7 @@ class Restaurant {
     this.city,
     this.rating,
     this.menu,
+    this.customerReviews,
   });
 
   factory Restaurant.fromJson(Map<String, dynamic> data) =>

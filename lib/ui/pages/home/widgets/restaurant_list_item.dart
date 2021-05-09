@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:restaurant/common/urls.dart';
 import 'package:restaurant/data/model/models.dart';
-import 'package:restaurant/data/providers/providers.dart';
 import 'package:restaurant/ui/pages/restaurant_detail/restaurant_detail_page.dart';
 import 'package:restaurant/ui/styles/styles.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class RestaurantListItem extends StatelessWidget {
   final Restaurant restaurant;
@@ -16,11 +15,10 @@ class RestaurantListItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        context.read(selectedRestaurantProvider).state = restaurant;
-
         Navigator.of(context).push(
           MaterialPageRoute(
-            builder: (context) => RestaurantDetailPage(),
+            builder: (context) =>
+                RestaurantDetailPage(restaurantId: restaurant.id!),
           ),
         );
       },
@@ -34,7 +32,8 @@ class RestaurantListItem extends StatelessWidget {
                 child: Hero(
                   tag: restaurant.pictureId!,
                   child: Image.network(
-                    restaurant.pictureId!,
+                    '$kBaseUrl/images/small/' +
+                        restaurant.pictureId!,
                     width: _contentHeight,
                     height: _contentHeight,
                     fit: BoxFit.cover,

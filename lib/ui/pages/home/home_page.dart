@@ -52,15 +52,14 @@ class HomePage extends StatelessWidget {
     return Consumer(
       builder: (context, watch, child) {
         final restaurants = watch(restaurantProvider);
-        final filteredRestaurants = watch(filteredRestaurantProvider);
-
+        
         return restaurants.when(
-          data: (restaurants) => filteredRestaurants.isEmpty
+          data: (restaurants) => restaurants.isEmpty
               ? Padding(
                   padding: const EdgeInsets.all(28.0),
                   child: Text('Restoran tidak ditemukan...'),
                 )
-              : RestaurantList(restaurants: filteredRestaurants),
+              : RestaurantList(restaurants: restaurants),
           loading: () => Padding(
             padding: const EdgeInsets.all(28.0),
             child: Center(child: CircularProgressIndicator()),
