@@ -23,7 +23,7 @@ class RestaurantNotifier extends StateNotifier<AsyncValue<List<Restaurant>>> {
   Future<void> searchRestaurants(String query) async {
     state = AsyncValue.loading();
 
-    if (query == '') loadRestaurants();
+    if (query == '') return loadRestaurants();
 
     try {
       state = AsyncValue.data(
