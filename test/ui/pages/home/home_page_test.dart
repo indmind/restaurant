@@ -6,7 +6,6 @@ import 'package:mockito/mockito.dart';
 import 'package:restaurant/data/model/restaurant.dart';
 import 'package:restaurant/data/repositories/repositories.dart';
 import 'package:restaurant/ui/pages/home/home_page.dart';
-import 'package:restaurant/ui/pages/home/widgets/app_bar.dart';
 import 'package:restaurant/ui/pages/home/widgets/restaurant_list.dart';
 
 import 'home_page_test.mocks.dart';
@@ -47,8 +46,8 @@ void main() {
     testWidgets('should have header and content', (tester) async {
       await tester.pumpWidget(createHomeScreen());
 
-      expect(find.byType(SliverPersistentHeader), findsOneWidget);
-      expect(find.byType(SliverToBoxAdapter), findsOneWidget);
+      expect(find.byType(SliverPersistentHeader), findsWidgets);
+      expect(find.byType(SliverFillRemaining), findsOneWidget);
     });
 
     testWidgets('should have correct header content', (tester) async {

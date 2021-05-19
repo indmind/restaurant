@@ -32,4 +32,18 @@ class Restaurant {
       _$RestaurantFromJson(data);
 
   Map<String, dynamic> toJson() => _$RestaurantToJson(this);
+
+  // used for db storing only
+  Map<String, dynamic> toRecord() {
+    Map<String, dynamic> record = Map();
+
+    record['id'] = this.id;
+    record['name'] = this.name;
+    record['description'] = this.description;
+    record['pictureId'] = this.pictureId;
+    record['city'] = this.city;
+    record['rating'] = this.rating;
+
+    return record;
+  }
 }

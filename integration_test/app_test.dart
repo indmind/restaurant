@@ -3,12 +3,13 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 
 import 'package:restaurant/main.dart' as app;
+import 'package:restaurant/ui/pages/home/widgets/restaurant_list.dart';
 
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
 
   testWidgets('Simple app test', (tester) async {
-    app.main();
+    await app.main();
 
     await tester.pumpAndSettle();
 
@@ -18,13 +19,14 @@ void main() {
 
     await tester.enterText(searchButton, 'melting');
 
-    await tester.pump();
+    // wait for debounce
+    await tester.pump(Duration(milliseconds: 500));
 
     expect(find.byType(CircularProgressIndicator), findsOneWidget);
 
-    await tester.pumpAndSettle(Duration(seconds: 5));
+    await tester.pumpAndSettle();
 
-    expect(find.byType(CircularProgressIndicator), findsOneWidget);
+    expect(find.byType(RestaurantList), findsOneWidget);
 
     // TODO: write other test
   });

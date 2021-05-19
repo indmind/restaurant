@@ -4,6 +4,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:restaurant/common/urls.dart';
 import 'package:restaurant/data/custom_exception.dart';
 import 'package:restaurant/data/model/models.dart';
+import 'package:restaurant/data/providers/favorite_restaurants_provider.dart';
 import 'package:restaurant/data/providers/restaurant_detail_provider.dart';
 import 'package:restaurant/ui/pages/home/widgets/restaurant_list_item.dart';
 import 'package:restaurant/ui/styles/colors.dart';
@@ -52,13 +53,37 @@ class RestaurantDetailPage extends HookWidget {
             ),
             expandedHeight: 200,
             pinned: true,
+            actions: [
+              if (restaurant != null)
+                Consumer(
+                  builder: (context, watch, child) {
+                    // just to listen to favorite restaurant changes
+                    watch(favoriteRestaurantProvider);
+
+                    return IconButton(
+                      onPressed: () {
+                        context
+                            .read(favoriteRestaurantProvider.notifier)
+                            .toggle(restaurant);
+                      },
+                      icon: Icon(
+                        Icons.favorite,
+                        color: context
+                                .read(favoriteRestaurantProvider.notifier)
+                                .isFavorite(restaurant)
+                            ? Colors.red
+                            : Colors.white,
+                      ),
+                    );
+                  },
+                ),
+            ],
             flexibleSpace: FlexibleSpaceBar(
               background: restaurant != null
                   ? Hero(
                       tag: restaurant.pictureId!,
                       child: Image.network(
-                        '$kBaseUrl/images/small/' +
-                            restaurant.pictureId!,
+                        '$kBaseUrl/images/small/' + restaurant.pictureId!,
                         color: Colors.black.withOpacity(0.5),
                         colorBlendMode: BlendMode.darken,
                         fit: BoxFit.cover,
