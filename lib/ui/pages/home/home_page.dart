@@ -20,7 +20,7 @@ class HomePage extends StatelessWidget {
         body: GestureDetector(
           behavior: HitTestBehavior.opaque,
           onTap: () {
-            FocusScope.of(context).requestFocus(FocusNode());
+            FocusScope.of(context).unfocus();
           },
           child: RefreshIndicator(
             onRefresh: () {
