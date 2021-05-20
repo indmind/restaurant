@@ -9,7 +9,7 @@ import 'package:restaurant/ui/styles/styles.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  final db = await openDatabaseConnection();
+  final db = await openDatabaseConnection('restaurant.db');
 
   runApp(
     ProviderScope(

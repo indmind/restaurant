@@ -3,7 +3,9 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
+import 'package:restaurant/data/db.dart';
 import 'package:restaurant/data/model/restaurant.dart';
+import 'package:restaurant/data/providers/db_provider.dart';
 import 'package:restaurant/data/repositories/repositories.dart';
 import 'package:restaurant/ui/pages/home/home_page.dart';
 import 'package:restaurant/ui/pages/home/widgets/restaurant_list.dart';
@@ -20,8 +22,11 @@ void main() {
       Restaurant(name: 'Ketan Hijau'),
     ];
 
-    Widget createHomeScreen() => ProviderScope(
+    Future<Widget> createHomeScreen() async => ProviderScope(
           overrides: [
+            dbProvider.overrideWithValue(
+              await openDatabaseConnection('restaurant_test.db'),
+            ),
             restaurantRepositoryProvider.overrideWithProvider(
               Provider(
                 (_) => _mockRepo,
@@ -44,14 +49,14 @@ void main() {
     });
 
     testWidgets('should have header and content', (tester) async {
-      await tester.pumpWidget(createHomeScreen());
+      await tester.pumpWidget(await createHomeScreen());
 
       expect(find.byType(SliverPersistentHeader), findsWidgets);
       expect(find.byType(SliverFillRemaining), findsOneWidget);
     });
 
     testWidgets('should have correct header content', (tester) async {
-      await tester.pumpWidget(createHomeScreen());
+      await tester.pumpWidget(await createHomeScreen());
 
       expect(find.text('Laper?'), findsOneWidget);
       expect(find.text('Rekomendasi restoran untuk kamu!'), findsOneWidget);
@@ -68,7 +73,7 @@ void main() {
     });
 
     testWidgets('should search for movies', (tester) async {
-      await tester.pumpWidget(createHomeScreen());
+      await tester.pumpWidget(await createHomeScreen());
 
       final searchButton = find.byWidgetPredicate(
         (widget) =>

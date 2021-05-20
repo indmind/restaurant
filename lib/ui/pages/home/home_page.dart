@@ -68,7 +68,7 @@ class HomePage extends HookWidget {
                 ),
                 SliverToBoxAdapter(
                   child: AnimatedSwitcher(
-                    duration: Duration(milliseconds: 2500),
+                    duration: Duration(milliseconds: 250),
                     child: selected.value == 0
                         ? _buildRestaurantsTab()
                         : _buildFavoriteRestaurantsTab(),
@@ -96,7 +96,11 @@ class HomePage extends HookWidget {
               : RestaurantList(restaurants: restaurants),
           loading: () => Padding(
             padding: const EdgeInsets.all(28.0),
-            child: Center(child: CircularProgressIndicator()),
+            child: Center(
+              child: CircularProgressIndicator(
+                color: kPrimaryColor,
+              ),
+            ),
           ),
           error: (error, stackTrace) => Padding(
             padding: const EdgeInsets.all(28.0),
@@ -126,7 +130,11 @@ class HomePage extends HookWidget {
                 ),
           loading: () => Padding(
             padding: const EdgeInsets.all(28.0),
-            child: Center(child: CircularProgressIndicator()),
+            child: Center(
+              child: CircularProgressIndicator(
+                color: kPrimaryColor,
+              ),
+            ),
           ),
           error: (error, stackTrace) => Padding(
             padding: const EdgeInsets.all(28.0),
@@ -139,4 +147,3 @@ class HomePage extends HookWidget {
     );
   }
 }
-

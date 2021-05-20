@@ -27,7 +27,11 @@ class RestaurantDetailPage extends HookWidget {
         },
         child: restaurantNotifier.when(
           data: (restaurant) => _buildPage(context, restaurant),
-          loading: () => Center(child: CircularProgressIndicator()),
+          loading: () => Center(
+            child: CircularProgressIndicator(
+              color: kPrimaryColor,
+            ),
+          ),
           error: (e, st) => Center(
             child: Text((e as CustomException).message ?? 'Terjadi kesalahan'),
           ),
