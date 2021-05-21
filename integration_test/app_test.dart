@@ -27,7 +27,5 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(find.byType(RestaurantList), findsOneWidget);
-
-    // TODO: write other test
   });
 }

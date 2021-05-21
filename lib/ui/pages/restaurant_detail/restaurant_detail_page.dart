@@ -5,7 +5,7 @@ import 'package:restaurant/common/urls.dart';
 import 'package:restaurant/data/custom_exception.dart';
 import 'package:restaurant/data/model/models.dart';
 import 'package:restaurant/data/providers/providers.dart';
-import 'package:restaurant/ui/pages/home/widgets/restaurant_list_item.dart';
+import 'package:restaurant/ui/widgets/restaurant_start.dart';
 import 'package:restaurant/ui/styles/colors.dart';
 
 class RestaurantDetailPage extends HookWidget {
