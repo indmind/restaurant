@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:restaurant/data/model/models.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:restaurant/data/providers/favorite_restaurants_provider.dart';
+import 'package:restaurant/data/providers/providers.dart';
 
 import 'restaurant_list_item.dart';
 

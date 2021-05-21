@@ -1,7 +1,7 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:restaurant/data/custom_exception.dart';
 import 'package:restaurant/data/model/models.dart';
-import 'package:restaurant/data/repositories/favorite_restaurant_repository.dart';
+import 'package:restaurant/data/repositories/repositories.dart';
 
 class FavoriteRestaurantNotifier
     extends StateNotifier<AsyncValue<List<Restaurant>>> {

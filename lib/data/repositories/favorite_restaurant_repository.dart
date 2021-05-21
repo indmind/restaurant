@@ -1,7 +1,7 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:restaurant/data/db.dart';
 import 'package:restaurant/data/model/models.dart';
-import 'package:restaurant/data/providers/db_provider.dart';
+import 'package:restaurant/data/providers/providers.dart';
 import 'package:sqflite/sqflite.dart';
 
 class FavoriteRestaurantRepository {

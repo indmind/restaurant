@@ -3,7 +3,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:restaurant/data/custom_exception.dart';
-import 'package:restaurant/data/providers/favorite_restaurants_provider.dart';
 import 'package:restaurant/data/providers/providers.dart';
 import 'package:restaurant/ui/pages/home/widgets/favorite_restaurant_badge.dart';
 import 'package:restaurant/ui/styles/colors.dart';

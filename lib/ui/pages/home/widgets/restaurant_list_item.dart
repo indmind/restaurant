@@ -32,8 +32,7 @@ class RestaurantListItem extends StatelessWidget {
                 child: Hero(
                   tag: restaurant.pictureId!,
                   child: Image.network(
-                    '$kBaseUrl/images/small/' +
-                        restaurant.pictureId!,
+                    '$kBaseUrl/images/small/' + restaurant.pictureId!,
                     width: _contentHeight,
                     height: _contentHeight,
                     fit: BoxFit.cover,

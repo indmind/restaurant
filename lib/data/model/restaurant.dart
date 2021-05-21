@@ -1,5 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:restaurant/data/model/review.dart';
+import 'package:restaurant/data/model/models.dart';
 
 import 'menu.dart';
 

@@ -2,6 +2,7 @@ import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:restaurant/data/providers/providers.dart';
+import 'package:restaurant/ui/pages/settings/settings_page.dart';
 
 class CustomSliverAppBarDelegate extends SliverPersistentHeaderDelegate {
   final double expandedHeight;
@@ -19,13 +20,7 @@ class CustomSliverAppBarDelegate extends SliverPersistentHeaderDelegate {
   Widget build(
       BuildContext context, double shrinkOffset, bool overlapsContent) {
     return Container(
-      decoration: BoxDecoration(color: Colors.white, boxShadow: [
-        BoxShadow(
-          offset: Offset(0, 3),
-          blurRadius: 3.0,
-          color: Colors.black.withOpacity(0.05),
-        )
-      ]),
+      decoration: BoxDecoration(color: Colors.white),
       child: Stack(
         children: [
           _buildHeader(context, shrinkOffset),
@@ -70,9 +65,22 @@ class CustomSliverAppBarDelegate extends SliverPersistentHeaderDelegate {
                   ),
                 ],
               ),
-              CircleAvatar(
-                radius: 24.0,
-                backgroundColor: Theme.of(context).primaryColor,
+              GestureDetector(
+                onTap: () async {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => SettingsPage(),
+                    ),
+                  );
+                },
+                child: CircleAvatar(
+                  radius: 24.0,
+                  backgroundColor: Theme.of(context).primaryColor,
+                  child: Icon(
+                    Icons.settings_rounded,
+                    color: Colors.white,
+                  ),
+                ),
               )
             ],
           ),
