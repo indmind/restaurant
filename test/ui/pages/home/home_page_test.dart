@@ -3,29 +3,31 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-import 'package:restaurant/data/db.dart';
 import 'package:restaurant/data/model/models.dart';
-import 'package:restaurant/data/providers/providers.dart';
 import 'package:restaurant/data/repositories/repositories.dart';
 import 'package:restaurant/ui/pages/home/home_page.dart';
 import 'package:restaurant/ui/pages/home/widgets/restaurant_list.dart';
 
 import 'home_page_test.mocks.dart';
 
-@GenerateMocks([RestaurantRepository])
+@GenerateMocks([RestaurantRepository, FavoriteRestaurantRepository])
 void main() {
   group('Home Page', () {
     final _mockRepo = MockRestaurantRepository();
+    final _mockFavRestoRepo = MockFavoriteRestaurantRepository();
+
     final _fakeRestaurants = [
       Restaurant(name: 'Bakso Malang'),
       Restaurant(name: 'Sop Buntut'),
       Restaurant(name: 'Ketan Hijau'),
     ];
 
-    Future<Widget> createHomeScreen() async => ProviderScope(
+    Widget createHomeScreen() => ProviderScope(
           overrides: [
-            dbProvider.overrideWithValue(
-              await openDatabaseConnection('restaurant_test.db'),
+            favoriteRestaurantRepositoryProvider.overrideWithProvider(
+              Provider(
+                (_) => _mockFavRestoRepo,
+              ),
             ),
             restaurantRepositoryProvider.overrideWithProvider(
               Provider(
@@ -46,17 +48,21 @@ void main() {
       when(_mockRepo.searchRestaurant('melting')).thenAnswer(
         (realInvocation) => Future.value([]),
       );
+
+      when(_mockFavRestoRepo.getAll()).thenAnswer(
+        (realInvocation) => Future.value(_fakeRestaurants),
+      );
     });
 
     testWidgets('should have header and content', (tester) async {
-      await tester.pumpWidget(await createHomeScreen());
+      await tester.pumpWidget(createHomeScreen());
 
       expect(find.byType(SliverPersistentHeader), findsWidgets);
-      expect(find.byType(SliverFillRemaining), findsOneWidget);
+      expect(find.byType(SliverToBoxAdapter), findsOneWidget);
     });
 
     testWidgets('should have correct header content', (tester) async {
-      await tester.pumpWidget(await createHomeScreen());
+      await tester.pumpWidget(createHomeScreen());
 
       expect(find.text('Laper?'), findsOneWidget);
       expect(find.text('Rekomendasi restoran untuk kamu!'), findsOneWidget);
@@ -73,7 +79,7 @@ void main() {
     });
 
     testWidgets('should search for movies', (tester) async {
-      await tester.pumpWidget(await createHomeScreen());
+      await tester.pumpWidget(createHomeScreen());
 
       final searchButton = find.byWidgetPredicate(
         (widget) =>

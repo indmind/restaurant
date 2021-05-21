@@ -6,6 +6,8 @@ import 'dart:async' as _i4;
 
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:restaurant/data/model/restaurant.dart' as _i2;
+import 'package:restaurant/data/repositories/favorite_restaurant_repository.dart'
+    as _i5;
 import 'package:restaurant/data/repositories/restaurant_repository.dart' as _i3;
 
 // ignore_for_file: comment_references
@@ -47,6 +49,32 @@ class MockRestaurantRepository extends _i1.Mock
           String? restaurantId, String? name, String? review) =>
       (super.noSuchMethod(
           Invocation.method(#postReview, [restaurantId, name, review]),
+          returnValue: Future<void>.value(null),
+          returnValueForMissingStub: Future.value()) as _i4.Future<void>);
+}
+
+/// A class which mocks [FavoriteRestaurantRepository].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockFavoriteRestaurantRepository extends _i1.Mock
+    implements _i5.FavoriteRestaurantRepository {
+  MockFavoriteRestaurantRepository() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  _i4.Future<List<_i2.Restaurant>> getAll() => (super.noSuchMethod(
+          Invocation.method(#getAll, []),
+          returnValue: Future<List<_i2.Restaurant>>.value(<_i2.Restaurant>[]))
+      as _i4.Future<List<_i2.Restaurant>>);
+  @override
+  _i4.Future<void> add(_i2.Restaurant? restaurant) =>
+      (super.noSuchMethod(Invocation.method(#add, [restaurant]),
+          returnValue: Future<void>.value(null),
+          returnValueForMissingStub: Future.value()) as _i4.Future<void>);
+  @override
+  _i4.Future<void> remove(_i2.Restaurant? restaurant) =>
+      (super.noSuchMethod(Invocation.method(#remove, [restaurant]),
           returnValue: Future<void>.value(null),
           returnValueForMissingStub: Future.value()) as _i4.Future<void>);
 }

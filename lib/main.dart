@@ -15,7 +15,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  // TODO: add native splashscreen
   final db = await openDatabaseConnection('restaurant.db');
   final preferences = await SharedPreferences.getInstance();
 
